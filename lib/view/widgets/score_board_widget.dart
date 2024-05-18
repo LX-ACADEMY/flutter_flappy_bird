@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ScoreBoard extends StatelessWidget {
-  const ScoreBoard({super.key});
+class ScoreBoardWidget extends StatelessWidget {
+  const ScoreBoardWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

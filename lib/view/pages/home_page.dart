@@ -1,6 +1,6 @@
-import 'package:flappy_bird/view/pages/bird.dart';
-import 'package:flappy_bird/view/pages/piller_part.dart';
-import 'package:flappy_bird/view/pages/score_board.dart';
+import 'package:flappy_bird/view/widgets/bird_widget.dart';
+import 'package:flappy_bird/view/widgets/piller_part_widget.dart';
+import 'package:flappy_bird/view/widgets/score_board_widget.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -12,11 +12,11 @@ class HomePage extends StatelessWidget {
       color: Colors.blue,
       height: double.infinity,
       width: double.infinity,
-      child:const Stack(
+      child: const Stack(
         children: [
-          PillerPart(),
-          ScoreBoard(),
-          Bird(),
+          PillerPartWidget(),
+          ScoreBoardWidget(),
+          BirdWidget(),
         ],
       ),
     );

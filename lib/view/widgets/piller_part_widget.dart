@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class PillerPart extends StatelessWidget {
-  const PillerPart({super.key});
+class PillerPartWidget extends StatelessWidget {
+  const PillerPartWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
