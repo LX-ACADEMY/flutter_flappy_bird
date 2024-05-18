@@ -1,6 +1,7 @@
-import 'package:flappy_bird/view/pages/bird.dart';
-import 'package:flappy_bird/view/pages/piller_part.dart';
-import 'package:flappy_bird/view/pages/score_board.dart';
+
+import 'package:flappy_bird/view/widgets/bird.dart';
+import 'package:flappy_bird/view/widgets/piller_part.dart';
+import 'package:flappy_bird/view/widgets/score_board.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
