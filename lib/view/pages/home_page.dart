@@ -1,4 +1,3 @@
-
 import 'package:flappy_bird/view/widgets/bird.dart';
 import 'package:flappy_bird/view/widgets/piller_part.dart';
 import 'package:flappy_bird/view/widgets/score_board.dart';
@@ -12,7 +11,7 @@ class HomePage extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/bj.png'), fit: BoxFit.cover)),
+              image: AssetImage('assets/bj.png'), fit: BoxFit.fill)),
       height: double.infinity,
       width: double.infinity,
       child: const Stack(
