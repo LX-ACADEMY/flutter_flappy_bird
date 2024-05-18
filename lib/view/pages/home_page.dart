@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
         children: [
           PillerPart(),
           ScoreBoard(),
-          Bird(),
+          Center(child: Bird()),
         ],
       ),
     );

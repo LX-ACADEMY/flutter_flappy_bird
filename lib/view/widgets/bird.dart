@@ -5,6 +5,16 @@ class Bird extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Container(
+      height: 80,
+      width: 80,
+      decoration: const BoxDecoration(
+          color: Colors.transparent,
+          shape: BoxShape.circle,
+          image: DecorationImage(
+            image: AssetImage("assets/flppy.png"),
+            fit: BoxFit.fill,
+          )),
+    );
   }
 }
