@@ -9,10 +9,12 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.blue,
+      decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('assets/bj.png'), fit: BoxFit.cover)),
       height: double.infinity,
       width: double.infinity,
-      child:const Stack(
+      child: const Stack(
         children: [
           PillerPart(),
           ScoreBoard(),
