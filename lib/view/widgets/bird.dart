@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class Bird extends StatefulWidget {
@@ -9,28 +11,31 @@ class Bird extends StatefulWidget {
 
 class _BirdState extends State<Bird> {
   var list = ["assets/birddf.png", "assets/birdmf.png", "assets/birduf.png"];
-  late int i;
+  int i = 0;
 
   @override
   void initState() {
-    i = 0;
+    Timer.periodic(const Duration(milliseconds: 100), (timer) {
+      setState(() {
+        i = timer.tick % list.length;
+      });
+    });
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    while (true) {
-      return Container(
-        height: 50,
-        width: 50,
-        decoration: BoxDecoration(
-            color: Colors.transparent,
-            shape: BoxShape.circle,
-            image: DecorationImage(
-              image: AssetImage(list[i]),
-              fit: BoxFit.fill,
-            )),
-      );
-    }
+    return Container(
+      height: 50,
+      width: 50,
+      decoration: BoxDecoration(
+          color: Colors.transparent,
+          shape: BoxShape.circle,
+          image: DecorationImage(
+            image: AssetImage(list[i]),
+            fit: BoxFit.fill,
+          )),
+    );
   }
 }
