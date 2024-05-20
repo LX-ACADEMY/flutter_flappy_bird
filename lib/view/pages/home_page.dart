@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
       const Duration(milliseconds: 130),
       (timer) {
         setState(() {
-          birdOffset = Offset(birdOffset.dx, birdOffset.dy + 1);
+          birdOffset = Offset(birdOffset.dx, birdOffset.dy + 3);
         });
       },
     );
