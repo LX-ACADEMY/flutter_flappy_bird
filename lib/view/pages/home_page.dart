@@ -30,8 +30,8 @@ class _HomePageState extends State<HomePage> {
           const PillerPart(),
           const ScoreBoard(),
           Positioned(
-            top: MediaQuery.sizeOf(context).height * 0.5 - 40,
-            left: MediaQuery.sizeOf(context).width * 0.5 - 40,
+            top: MediaQuery.sizeOf(context).height * 0.5 - 25,
+            left: MediaQuery.sizeOf(context).width * 0.5 - 25,
             child: const Bird(),
           ),
         ],
