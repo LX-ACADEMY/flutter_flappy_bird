@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flappy_bird/view/widgets/bird.dart';
 import 'package:flappy_bird/view/widgets/piller_part.dart';
 import 'package:flappy_bird/view/widgets/score_board.dart';
@@ -12,8 +14,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // late GlobalKey birdkey;
+  Offset birdOffset = Offset.zero;
+
   @override
   void initState() {
+    // birdkey = GlobalKey();
+
+    Timer.periodic(
+      const Duration(milliseconds: 30),
+      (timer) {
+        setState(() {
+          birdOffset = Offset(birdOffset.dx, birdOffset.dy + 1);
+        });
+      },
+    );
+
     super.initState();
   }
 
@@ -31,8 +47,13 @@ class _HomePageState extends State<HomePage> {
           const ScoreBoard(),
           Positioned(
             top: MediaQuery.sizeOf(context).height * 0.5 - 25,
-            left: MediaQuery.sizeOf(context).width * 0.5 - 25,
-            child: const Bird(),
+            left: MediaQuery.sizeOf(context).width * 0.5 - 105,
+            child: Transform.translate(
+              offset: birdOffset,
+              child: const Bird(
+                  // key: birdkey,
+                  ),
+            ),
           ),
         ],
       ),
