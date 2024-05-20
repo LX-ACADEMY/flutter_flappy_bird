@@ -14,15 +14,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // late GlobalKey birdkey;
   Offset birdOffset = Offset.zero;
 
   @override
   void initState() {
-    // birdkey = GlobalKey();
-
     Timer.periodic(
-      const Duration(milliseconds: 30),
+      const Duration(milliseconds: 130),
       (timer) {
         setState(() {
           birdOffset = Offset(birdOffset.dx, birdOffset.dy + 1);
@@ -35,27 +32,32 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/bj.png'), fit: BoxFit.fill)),
-      height: double.infinity,
-      width: double.infinity,
-      child: Stack(
-        children: [
-          const PillerPart(),
-          const ScoreBoard(),
-          Positioned(
-            top: MediaQuery.sizeOf(context).height * 0.5 - 25,
-            left: MediaQuery.sizeOf(context).width * 0.5 - 105,
-            child: Transform.translate(
-              offset: birdOffset,
-              child: const Bird(
-                  // key: birdkey,
-                  ),
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          birdOffset = Offset(birdOffset.dx, birdOffset.dy - 30);
+        });
+      },
+      child: Container(
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/bj.png'), fit: BoxFit.fill)),
+        height: double.infinity,
+        width: double.infinity,
+        child: Stack(
+          children: [
+            const PillerPart(),
+            const ScoreBoard(),
+            Positioned(
+              top: MediaQuery.sizeOf(context).height * 0.5 - 25,
+              left: MediaQuery.sizeOf(context).width * 0.5 - 105,
+              child: Transform.translate(
+                offset: birdOffset,
+                child: const Bird(),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
