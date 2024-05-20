@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
               image: AssetImage('assets/bj.png'), fit: BoxFit.fill)),
       height: double.infinity,
       width: double.infinity,
-      child: const Stack(
+      child:  Stack(
         children: [
           PillerPart(),
           ScoreBoard(),

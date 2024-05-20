@@ -1,7 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class PillerPart extends StatelessWidget {
-  const PillerPart({super.key});
+  // var randomObject = Random();
+
+  PillerPart({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +21,20 @@ class PillerPart extends StatelessWidget {
               children: [
                 Container(
                   width: double.infinity,
-                  height: 100,
-                  color: const Color.fromARGB(255, 234, 111, 4),
+                  height: 200,
+                  child: Image.asset(
+                    "assets/Pasted image (2).png",
+                    fit: BoxFit.fill,
+                  ),
                 ),
                 const Spacer(),
                 Container(
                   width: 100,
                   height: 200,
-                  color: const Color.fromARGB(255, 234, 111, 4),
+                  child: Image.asset(
+                    "assets/Pasted image (3).png",
+                    fit: BoxFit.fill,
+                  ),
                 ),
                 Container(
                     width: double.infinity,
@@ -39,7 +49,7 @@ class PillerPart extends StatelessWidget {
         } else {
           return Container(
             height: double.infinity,
-            width: 100,
+            width: 150,
             child: Column(
               children: [
                 const Spacer(),
