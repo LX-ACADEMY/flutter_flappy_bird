@@ -14,7 +14,7 @@ class PillerPart extends StatelessWidget {
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemBuilder: (context, index) {
-        if (index % 2 == 0) {
+        if (index % 2 == 1) {
           return Container(
             height: double.infinity,
             color: Colors.transparent,
