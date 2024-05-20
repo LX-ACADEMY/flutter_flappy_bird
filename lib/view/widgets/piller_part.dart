@@ -2,18 +2,32 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-class PillerPart extends StatelessWidget {
-  PillerPart({super.key});
+class PillerPart extends StatefulWidget {
+  const PillerPart({super.key});
 
-  late double intValue;
+  @override
+  State<PillerPart> createState() => _PillerPartState();
+}
 
-  // var randomObject = Random();
+class _PillerPartState extends State<PillerPart> {
+  final heightCache = List<double?>.generate(100, (index) => null);
+
   @override
   Widget build(BuildContext context) {
-    double pillerFullWidth = MediaQuery.of(context).size.height - 300;
+    late double pillerFullWidth = MediaQuery.of(context).size.height - 300;
+
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemBuilder: (context, index) {
+        double intValue;
+
+        if (heightCache[index % 100] == null) {
+          intValue = Random().nextInt(pillerFullWidth.toInt()).toDouble();
+          heightCache[index % 100] = intValue;
+        } else {
+          intValue = heightCache[index % 100]!;
+        }
+
         if (index % 2 == 1) {
           return Container(
             height: double.infinity,
@@ -23,12 +37,7 @@ class PillerPart extends StatelessWidget {
               children: [
                 Container(
                   width: double.infinity,
-                  height: intValue =
-                      Random().nextInt(pillerFullWidth.toInt()).toDouble(),
-                  // child: Image.asset(
-                  //   "assets/Pasted image (2).png",
-                  //   fit: BoxFit.fill,
-                  // ),
+                  height: intValue,
                   decoration: const BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage("assets/Pasted image (2).png"),
@@ -58,7 +67,7 @@ class PillerPart extends StatelessWidget {
             ),
           );
         } else {
-          return Container(
+          return SizedBox(
             height: double.infinity,
             width: 200,
             child: Column(
