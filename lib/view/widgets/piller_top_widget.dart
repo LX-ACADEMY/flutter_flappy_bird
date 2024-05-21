@@ -56,18 +56,18 @@ class _PillerWidgetState extends State<PillerWidget> {
     final birdbottomright =
         birdBox.localToGlobal(Offset(birdWidth, birdHeight));
 
-    if ((birdtopleft.dx >= pillerbottomleft.dx &&
-            birdbottomleft.dx <= pillerbottomright.dx) ||
-        (birdtopright.dx >= pillerbottomleft.dx &&
-            birdtopright.dx <= pillerbottomright.dx) ||
+    if (((birdtopleft.dx >= pillerbottomleft.dx &&
+                birdbottomleft.dx <= pillerbottomright.dx) ||
+            (birdtopright.dx >= pillerbottomleft.dx &&
+                birdtopright.dx <= pillerbottomright.dx)) &&
         // (birdbottomleft.dx >= pillertopleft.dx &&
         //     birdbottomleft.dx <= pillertopright.dx) ||
         // (birdbottomright.dx >= pillertopleft.dx &&
         //     birdbottomright.dx <= pillertopright.dx) ||
-        (birdtopright.dy >= pillertopleft.dy &&
-            birdtopright.dy <= pillerbottomright.dy) ||
-        (birdbottomright.dy >= pillertopleft.dy &&
-            birdbottomright.dy <= pillerbottomright.dy)) {
+        ((birdtopright.dy >= pillertopleft.dy &&
+                birdtopright.dy <= pillerbottomright.dy) ||
+            (birdbottomright.dy >= pillertopleft.dy &&
+                birdbottomright.dy <= pillerbottomright.dy))) {
       // (birdbottomleft.dy >= (screensize).dy - 100)
       gameover(20, 5, context);
     }
