@@ -1,3 +1,4 @@
+import 'package:flappy_bird/view/widgets/game_over_widget.dart';
 import 'package:flutter/material.dart';
 
 class PillerWidget extends StatefulWidget {
@@ -68,7 +69,7 @@ class _PillerWidgetState extends State<PillerWidget> {
         (birdbottomright.dy >= pillertopleft.dy &&
             birdbottomright.dy <= pillerbottomright.dy)) {
       // (birdbottomleft.dy >= (screensize).dy - 100)
-      print("alert box game over");
+      gameover(20, 5, context);
     }
   }
 
