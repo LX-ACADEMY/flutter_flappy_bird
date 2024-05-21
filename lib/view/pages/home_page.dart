@@ -19,10 +19,10 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     Timer.periodic(
-      const Duration(milliseconds: 130),
+      const Duration(milliseconds: 90),
       (timer) {
         setState(() {
-          birdOffset = Offset(birdOffset.dx, birdOffset.dy + 3);
+          birdOffset = Offset(birdOffset.dx, birdOffset.dy + 12);
         });
       },
     );
@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
     return GestureDetector(
       onTap: () {
         setState(() {
-          birdOffset = Offset(birdOffset.dx, birdOffset.dy - 30);
+          birdOffset = Offset(birdOffset.dx, birdOffset.dy - 70);
         });
       },
       child: Container(
