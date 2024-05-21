@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:flappy_bird/view/widgets/bird.dart';
+import 'package:flappy_bird/view/widgets/game_over_widget.dart';
 import 'package:flappy_bird/view/widgets/piller_part.dart';
 import 'package:flappy_bird/view/widgets/score_board.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -54,6 +54,10 @@ class _HomePageState extends State<HomePage> {
               worldScrollController: worldScrollController,
               birdKey: birdkey,
             ),
+            // PillerPart(
+            //   birdKey: birdkey,
+            //   worldScrollController: worldScrollController,
+            // ),
             const ScoreBoard(),
             Positioned(
               top: MediaQuery.sizeOf(context).height * 0.5 - 25,
@@ -65,6 +69,11 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+            TextButton(
+                onPressed: () {
+                  gameover(200, 100, context);
+                },
+                child: const Text('OUT'))
           ],
         ),
       ),

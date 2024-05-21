@@ -1,3 +1,4 @@
+import 'package:flappy_bird/view/widgets/game_over_widget.dart';
 import 'package:flutter/material.dart';
 
 class PillerWidget extends StatefulWidget {
@@ -56,19 +57,20 @@ class _PillerWidgetState extends State<PillerWidget> {
         birdBox.localToGlobal(Offset(birdWidth, birdHeight));
 
     if ((birdtopleft.dx >= pillerbottomleft.dx &&
-            birdbottomleft.dx <= pillerbottomright.dx) ||
-        (birdtopright.dx >= pillerbottomleft.dx &&
-            birdtopright.dx <= pillerbottomright.dx) ||
-        // (birdbottomleft.dx >= pillertopleft.dx &&
-        //     birdbottomleft.dx <= pillertopright.dx) ||
-        // (birdbottomright.dx >= pillertopleft.dx &&
-        //     birdbottomright.dx <= pillertopright.dx) ||
-        (birdtopright.dy >= pillertopleft.dy &&
-            birdtopright.dy <= pillerbottomright.dy) ||
-        (birdbottomright.dy >= pillertopleft.dy &&
-            birdbottomright.dy <= pillerbottomright.dy)) {
-      // (birdbottomleft.dy >= (screensize).dy - 100)
-      print("alert box game over");
+                birdbottomleft.dx <= pillerbottomright.dx) ||
+            (birdtopright.dx >= pillerbottomleft.dx &&
+                birdtopright.dx <= pillerbottomright.dx) ||
+            // (birdbottomleft.dx >= pillertopleft.dx &&
+            //     birdbottomleft.dx <= pillertopright.dx) ||
+            // (birdbottomright.dx >= pillertopleft.dx &&
+            //     birdbottomright.dx <= pillertopright.dx) ||
+            (birdtopright.dy >= pillertopleft.dy &&
+                birdtopright.dy <= pillerbottomright.dy) ||
+            (birdbottomright.dy >= pillertopleft.dy &&
+                birdbottomright.dy <= pillerbottomright.dy)
+        // (birdbottomleft.dy >= (screensize).dy - 100)
+        ) {
+      gameover(25, 2, context);
     }
   }
 
