@@ -1,9 +1,17 @@
 import 'dart:math';
 
+import 'package:flappy_bird/view/widgets/piller_top_widget.dart';
 import 'package:flutter/material.dart';
 
 class PillerPart extends StatefulWidget {
-  const PillerPart({super.key});
+  final GlobalKey birdKey;
+  final ScrollController worldScrollController;
+
+  const PillerPart({
+    super.key,
+    required this.birdKey,
+    required this.worldScrollController,
+  });
 
   @override
   State<PillerPart> createState() => _PillerPartState();
@@ -17,15 +25,17 @@ class _PillerPartState extends State<PillerPart> {
     late double pillerFullWidth = MediaQuery.of(context).size.height - 300;
 
     return ListView.builder(
+      controller: widget.worldScrollController,
       scrollDirection: Axis.horizontal,
       itemBuilder: (context, index) {
-        double intValue;
+        double topPillerHeight;
 
         if (heightCache[index % 100] == null) {
-          intValue = Random().nextInt(pillerFullWidth.toInt()).toDouble();
-          heightCache[index % 100] = intValue;
+          topPillerHeight =
+              Random().nextInt(pillerFullWidth.toInt()).toDouble();
+          heightCache[index % 100] = topPillerHeight;
         } else {
-          intValue = heightCache[index % 100]!;
+          topPillerHeight = heightCache[index % 100]!;
         }
 
         if (index % 2 == 1) {
@@ -35,27 +45,18 @@ class _PillerPartState extends State<PillerPart> {
             width: 100,
             child: Column(
               children: [
-                Container(
-                  width: double.infinity,
-                  height: intValue,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("assets/Pasted image (2).png"),
-                      fit: BoxFit.fitWidth,
-                      alignment: FractionalOffset.bottomCenter,
-                    ),
-                  ),
+                PillerWidget(
+                  birdKey: widget.birdKey,
+                  worldScrollController: widget.worldScrollController,
+                  isTopPiller: true,
+                  pillerHeight: topPillerHeight,
                 ),
                 const Spacer(),
-                Container(
-                  width: 100,
-                  height: pillerFullWidth - intValue,
-                  decoration: const BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage("assets/Pasted image (3).png"),
-                          fit: BoxFit.fitWidth,
-                          alignment: FractionalOffset.topCenter)),
-                ),
+                PillerWidget(
+                    birdKey: widget.birdKey,
+                    worldScrollController: widget.worldScrollController,
+                    isTopPiller: false,
+                    pillerHeight: pillerFullWidth - topPillerHeight),
                 Container(
                     width: double.infinity,
                     height: 100,

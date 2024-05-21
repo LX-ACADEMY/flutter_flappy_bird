@@ -15,9 +15,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Offset birdOffset = Offset.zero;
+  late GlobalKey birdkey;
+  late ScrollController worldScrollController;
 
   @override
   void initState() {
+    worldScrollController = ScrollController();
+    birdkey = GlobalKey();
     Timer.periodic(
       const Duration(milliseconds: 90),
       (timer) {
@@ -32,19 +36,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // return Container(
-    //   decoration: const BoxDecoration(
-    //       image: DecorationImage(
-    //           image: AssetImage('assets/bj.png'), fit: BoxFit.fill)),
-    //   height: double.infinity,
-    //   width: double.infinity,
-    //   child:  Stack(
-    //     children: [
-    //       PillerPart(),
-    //       ScoreBoard(),
-    //       Bird(),
-    //     ],
-
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -59,14 +50,19 @@ class _HomePageState extends State<HomePage> {
         width: double.infinity,
         child: Stack(
           children: [
-            PillerPart(),
+            PillerPart(
+              worldScrollController: worldScrollController,
+              birdKey: birdkey,
+            ),
             const ScoreBoard(),
             Positioned(
               top: MediaQuery.sizeOf(context).height * 0.5 - 25,
               left: MediaQuery.sizeOf(context).width * 0.5 - 105,
               child: Transform.translate(
                 offset: birdOffset,
-                child: const Bird(),
+                child: Bird(
+                  key: birdkey,
+                ),
               ),
             ),
           ],
