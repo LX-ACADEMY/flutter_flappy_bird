@@ -37,8 +37,24 @@ class _PillerPartState extends State<PillerPart> {
         } else {
           topPillerHeight = heightCache[index % 100]!;
         }
-
-        if (index % 2 == 1) {
+        if (index < 3) {
+          return SizedBox(
+            height: double.infinity,
+            width: 200,
+            child: Column(
+              children: [
+                const Spacer(),
+                Container(
+                    width: double.infinity,
+                    height: 100,
+                    decoration: const BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage("assets/Pasted image.png"),
+                            fit: BoxFit.fill))),
+              ],
+            ),
+          );
+        } else if (index % 2 == 1) {
           return Container(
             height: double.infinity,
             color: Colors.transparent,
