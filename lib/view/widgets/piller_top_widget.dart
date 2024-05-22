@@ -48,7 +48,7 @@ class _PillerWidgetState extends State<PillerWidget> {
     final birdWidth = birdBox.size.width;
 
     final pillertopleft = pillerBox.localToGlobal(Offset.zero);
-    final pillertopright = pillerBox.localToGlobal(Offset(pillerWidth, 0));
+    // final pillertopright = pillerBox.localToGlobal(Offset(pillerWidth, 0));
     final pillerbottomleft = pillerBox.localToGlobal(Offset(0, pillerHeight));
     final pillerbottomright =
         pillerBox.localToGlobal(Offset(pillerWidth, pillerHeight));
