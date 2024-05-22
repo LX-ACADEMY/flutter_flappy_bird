@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
               worldScrollController: worldScrollController,
               birdKey: birdkey,
             ),
-            const ScoreBoard(),
+            ScoreBoard(),
             Positioned(
               top: MediaQuery.sizeOf(context).height * 0.5 - 25,
               left: MediaQuery.sizeOf(context).width * 0.5 - 105,
