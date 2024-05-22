@@ -19,6 +19,7 @@ class PillerPart extends StatefulWidget {
 
 class _PillerPartState extends State<PillerPart> {
   final heightCache = List<double?>.generate(100, (index) => null);
+  late int customIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class _PillerPartState extends State<PillerPart> {
       scrollDirection: Axis.horizontal,
       itemBuilder: (context, index) {
         double topPillerHeight;
-
+        customIndex = index;
         if (heightCache[index % 100] == null) {
           topPillerHeight =
               Random().nextInt(pillerFullWidth.toInt()).toDouble();
@@ -50,9 +51,11 @@ class _PillerPartState extends State<PillerPart> {
                   worldScrollController: widget.worldScrollController,
                   isTopPiller: true,
                   pillerHeight: topPillerHeight,
+                  pillerIndex: customIndex,
                 ),
                 const Spacer(),
                 PillerWidget(
+                    pillerIndex: customIndex,
                     birdKey: widget.birdKey,
                     worldScrollController: widget.worldScrollController,
                     isTopPiller: false,

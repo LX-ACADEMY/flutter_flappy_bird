@@ -6,14 +6,15 @@ class PillerWidget extends StatefulWidget {
   final bool isTopPiller;
   final ScrollController worldScrollController;
   final GlobalKey birdKey;
+  late int pillerIndex;
 
-  const PillerWidget({
-    super.key,
-    required this.birdKey,
-    required this.worldScrollController,
-    required this.isTopPiller,
-    required this.pillerHeight,
-  });
+  PillerWidget(
+      {super.key,
+      required this.birdKey,
+      required this.worldScrollController,
+      required this.isTopPiller,
+      required this.pillerHeight,
+      required this.pillerIndex});
 
   @override
   State<PillerWidget> createState() => _PillerWidgetState();
@@ -23,6 +24,7 @@ class _PillerWidgetState extends State<PillerWidget> {
   @override
   void initState() {
     widget.worldScrollController.addListener(checkPillerCollision);
+    widget.worldScrollController.addListener(checkGroundCollision);
 
     super.initState();
   }
@@ -30,6 +32,7 @@ class _PillerWidgetState extends State<PillerWidget> {
   @override
   void dispose() {
     widget.worldScrollController.removeListener(checkPillerCollision);
+    widget.worldScrollController.removeListener(checkGroundCollision);
 
     super.dispose();
   }
@@ -68,8 +71,27 @@ class _PillerWidgetState extends State<PillerWidget> {
                 birdtopright.dy <= pillerbottomright.dy) ||
             (birdbottomright.dy >= pillertopleft.dy &&
                 birdbottomright.dy <= pillerbottomright.dy))) {
-      // (birdbottomleft.dy >= (screensize).dy - 100)
       gameover(20, 5, context);
+    }
+
+    if ((birdtopleft.dy <= 0) && (widget.pillerIndex % 2 == 1)) {
+      gameover(20, 5, context);
+      print(widget.pillerIndex % 2 == 1);
+    }
+  }
+
+  void checkGroundCollision() {
+    final birdBox =
+        widget.birdKey.currentContext!.findRenderObject() as RenderBox;
+
+    final birdHeight = birdBox.size.height;
+
+    final Offset screensize =
+        Offset(0, MediaQuery.of(context).size.height - 100);
+    final birdbottomleft = birdBox.localToGlobal(Offset(0, birdHeight));
+
+    if ((birdbottomleft.dy >= (screensize).dy)) {
+      gameover(30, 8, context);
     }
   }
 
