@@ -1,4 +1,4 @@
-import 'package:flappy_bird/view/pages/home_page.dart';
+import 'package:flappy_bird/view/pages/starting_page.dart';
 import 'package:flutter/material.dart';
 
 void gameover(int hs, s, context) {
@@ -71,12 +71,12 @@ void gameover(int hs, s, context) {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const HomePage()));
+                          builder: (context) => const StartingPage()));
                 },
                 style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all(
+                  foregroundColor: WidgetStateProperty.all(
                       Colors.red), // specify the text color here
-                  backgroundColor: MaterialStateProperty.all(
+                  backgroundColor: WidgetStateProperty.all(
                       Colors.green), // specify the background color here
                 ),
                 child: const Text('RESTART'),
