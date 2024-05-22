@@ -74,9 +74,9 @@ void gameover(int hs, s, context) {
                           builder: (context) => const HomePage()));
                 },
                 style: ButtonStyle(
-                  foregroundColor: WidgetStateProperty.all(
+                  foregroundColor: MaterialStateProperty.all(
                       Colors.red), // specify the text color here
-                  backgroundColor: WidgetStateProperty.all(
+                  backgroundColor: MaterialStateProperty.all(
                       Colors.green), // specify the background color here
                 ),
                 child: const Text('RESTART'),
