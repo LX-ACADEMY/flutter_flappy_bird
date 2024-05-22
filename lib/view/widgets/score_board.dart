@@ -1,7 +1,21 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class ScoreBoard extends StatelessWidget {
+  final VoidCallback resumeGameCallback;
+  final VoidCallback pauseGameCallback;
+  final bool isPaused;
+  final int score;
+
+  ScoreBoard({
+    super.key,
+    required this.isPaused,
+    required this.score,
+    required this.resumeGameCallback,
+    required this.pauseGameCallback,
+  });
+
   final List<String> numbers = [
     'assets/numbers/0.png',
     'assets/numbers/1.png',
@@ -14,9 +28,6 @@ class ScoreBoard extends StatelessWidget {
     'assets/numbers/8.png',
     'assets/numbers/9.png',
   ];
-  final int score;
-
-  ScoreBoard({super.key, required this.score});
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +38,23 @@ class ScoreBoard extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Padding(
-          padding: EdgeInsets.all(15.0),
-          child: SizedBox(
-            height: 35,
-            width: 35,
-            child: Image(
-              image: AssetImage('assets/pause.png'),
-              fit: BoxFit.cover,
+        Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: GestureDetector(
+            onTap: () {
+              if (isPaused) {
+                resumeGameCallback();
+              } else {
+                pauseGameCallback();
+              }
+            },
+            child: const SizedBox(
+              height: 35,
+              width: 35,
+              child: Image(
+                image: AssetImage('assets/pause.png'),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),

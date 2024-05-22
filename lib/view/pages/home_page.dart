@@ -19,8 +19,11 @@ class _HomePageState extends State<HomePage> {
   late Offset birdOffset;
   late GlobalKey birdKey;
   late final ScrollController worldScrollController;
-  late final Timer _birdGravityTimer;
-  late final Timer _wordScrollTimer;
+  late Timer _birdGravityTimer;
+  late Timer _wordScrollTimer;
+
+  /// Indicate if the game is already paused
+  late bool isPaused;
 
   int score = 0;
 
@@ -29,24 +32,9 @@ class _HomePageState extends State<HomePage> {
     worldScrollController = ScrollController();
     birdOffset = Offset.zero;
     birdKey = GlobalKey();
+    isPaused = false;
 
-    /// Bird gravity movement
-    _birdGravityTimer = Timer.periodic(
-      const Duration(milliseconds: 90),
-      (timer) {
-        setState(() {
-          birdOffset = Offset(birdOffset.dx, birdOffset.dy + 10);
-        });
-
-        checkGroundCollision();
-      },
-    );
-
-    Future.delayed(Duration.zero, () {
-      return Timer.periodic(const Duration(milliseconds: 10), (timer) {
-        worldScrollController.jumpTo(worldScrollController.offset + 1);
-      });
-    }).then((value) => _wordScrollTimer = value);
+    resumeGame(true);
 
     super.initState();
   }
@@ -75,11 +63,43 @@ class _HomePageState extends State<HomePage> {
 
   /// Pause the game
   void pauseGame() {
+    setState(() {
+      isPaused = true;
+    });
+
     /// Stop the bird gravity
     _birdGravityTimer.cancel();
 
     /// Stop world scrolling
     _wordScrollTimer.cancel();
+  }
+
+  /// Start/Resume the game
+  void resumeGame([bool isInitStateCall = false]) {
+    if (!isInitStateCall) {
+      setState(() {
+        isPaused = false;
+      });
+    }
+
+    /// Bird gravity movement start
+    _birdGravityTimer = Timer.periodic(
+      const Duration(milliseconds: 90),
+      (timer) {
+        setState(() {
+          birdOffset = Offset(birdOffset.dx, birdOffset.dy + 10);
+        });
+
+        checkGroundCollision();
+      },
+    );
+
+    /// Word scroll movement start
+    Future.delayed(Duration.zero, () {
+      return Timer.periodic(const Duration(milliseconds: 10), (timer) {
+        worldScrollController.jumpTo(worldScrollController.offset + 1);
+      });
+    }).then((value) => _wordScrollTimer = value);
   }
 
   /// Update the score
@@ -112,13 +132,19 @@ class _HomePageState extends State<HomePage> {
               birdKey: birdKey,
               updateScore: updateScore,
             ),
-            ScoreBoard(score: score),
+            ScoreBoard(
+              isPaused: isPaused,
+              pauseGameCallback: pauseGame,
+              resumeGameCallback: resumeGame,
+              score: score,
+            ),
             Positioned(
               top: MediaQuery.sizeOf(context).height * 0.5 - 25,
               left: MediaQuery.sizeOf(context).width * 0.5 - 105,
               child: Transform.translate(
                 offset: birdOffset,
                 child: Bird(
+                  isPaused: isPaused,
                   key: birdKey,
                 ),
               ),

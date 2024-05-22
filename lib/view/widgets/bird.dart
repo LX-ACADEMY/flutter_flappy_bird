@@ -3,7 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 class Bird extends StatefulWidget {
-  const Bird({super.key});
+  final bool isPaused;
+
+  const Bird({
+    super.key,
+    required this.isPaused,
+  });
 
   @override
   State<Bird> createState() => _BirdState();
@@ -12,16 +17,42 @@ class Bird extends StatefulWidget {
 class _BirdState extends State<Bird> {
   var list = ["assets/birddf.png", "assets/birdmf.png", "assets/birduf.png"];
   int i = 0;
+  Timer? _birdWingsTimer;
 
   @override
   void initState() {
-    Timer.periodic(const Duration(milliseconds: 100), (timer) {
+    startBirdAnimation();
+
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant Bird oldWidget) {
+    if (widget.isPaused) {
+      stopBirdAnimation();
+    } else {
+      startBirdAnimation();
+    }
+
+    super.didUpdateWidget(oldWidget);
+  }
+
+  void startBirdAnimation() {
+    if (!widget.isPaused) {
+      stopBirdAnimation();
+    }
+
+    _birdWingsTimer =
+        Timer.periodic(const Duration(milliseconds: 100), (timer) {
       setState(() {
         i = timer.tick % list.length;
       });
     });
+  }
 
-    super.initState();
+  void stopBirdAnimation() {
+    _birdWingsTimer?.cancel();
+    _birdWingsTimer = null;
   }
 
   @override
