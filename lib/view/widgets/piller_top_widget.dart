@@ -76,7 +76,6 @@ class _PillerWidgetState extends State<PillerWidget> {
 
     if ((birdtopleft.dy <= 0) && (widget.pillerIndex % 2 == 1)) {
       gameover(20, 5, context);
-      print(widget.pillerIndex % 2 == 1);
     }
   }
 
