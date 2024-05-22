@@ -16,7 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Offset birdOffset = Offset.zero;
   late GlobalKey birdkey;
-  late ScrollController worldScrollController;
+  late final ScrollController worldScrollController;
 
   @override
   void initState() {
@@ -26,12 +26,18 @@ class _HomePageState extends State<HomePage> {
       const Duration(milliseconds: 90),
       (timer) {
         setState(() {
-          birdOffset = Offset(birdOffset.dx, birdOffset.dy + 12);
+          birdOffset = Offset(birdOffset.dx, birdOffset.dy + 10);
         });
       },
     );
 
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    worldScrollController.dispose();
+    super.dispose();
   }
 
   @override

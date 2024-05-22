@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flappy_bird/view/widgets/piller_top_widget.dart';
@@ -20,6 +21,28 @@ class PillerPart extends StatefulWidget {
 class _PillerPartState extends State<PillerPart> {
   final heightCache = List<double?>.generate(100, (index) => null);
   late int customIndex;
+
+  Timer? timer;
+
+  // @override
+  // void initState() {
+  //   final worldScrollController = ScrollController();
+
+  //   super.initState();
+  // }
+
+  @override
+  void didUpdateWidget(covariant PillerPart oldWidget) {
+    timer?.cancel();
+    timer = null;
+
+    timer = Timer.periodic(const Duration(milliseconds: 10), (timer) {
+      widget.worldScrollController
+          .jumpTo(widget.worldScrollController.offset + 1);
+    });
+
+    super.didUpdateWidget(oldWidget);
+  }
 
   @override
   Widget build(BuildContext context) {
