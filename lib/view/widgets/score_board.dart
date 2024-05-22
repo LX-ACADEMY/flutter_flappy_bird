@@ -15,6 +15,7 @@ class ScoreBoard extends StatelessWidget {
     'assets/numbers/9.png',
   ];
   final int score = 0123;
+
   ScoreBoard({super.key});
 
   @override
@@ -22,6 +23,7 @@ class ScoreBoard extends StatelessWidget {
     int scorelength = score.toString().length;
     List<String> switchcheckingscore = score.toString().split('');
     List<String> scorestorage = [];
+
     for (int i = 0; i < scorelength; i++) {
       switch (switchcheckingscore[i]) {
         case '0':

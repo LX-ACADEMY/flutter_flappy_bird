@@ -24,7 +24,6 @@ class _PillerPartState extends State<PillerPart> {
   @override
   Widget build(BuildContext context) {
     late double pillerFullWidth = MediaQuery.of(context).size.height - 300;
-
     return ListView.builder(
       controller: widget.worldScrollController,
       scrollDirection: Axis.horizontal,
