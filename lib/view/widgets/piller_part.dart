@@ -7,11 +7,13 @@ import 'package:flutter/material.dart';
 class PillerPart extends StatefulWidget {
   final GlobalKey birdKey;
   final ScrollController worldScrollController;
+  final void Function(int index) updateScore;
 
   const PillerPart({
     super.key,
     required this.birdKey,
     required this.worldScrollController,
+    required this.updateScore,
   });
 
   @override
@@ -47,13 +49,14 @@ class _PillerPartState extends State<PillerPart> {
   @override
   Widget build(BuildContext context) {
     late double pillerFullWidth = MediaQuery.of(context).size.height - 300;
-
     return ListView.builder(
       controller: widget.worldScrollController,
       scrollDirection: Axis.horizontal,
       itemBuilder: (context, index) {
         double topPillerHeight;
         customIndex = index;
+        Future.delayed(
+            Duration.zero, () => widget.updateScore((index / 2).ceil() - 3));
         if (heightCache[index % 100] == null) {
           topPillerHeight =
               Random().nextInt(pillerFullWidth.toInt()).toDouble();

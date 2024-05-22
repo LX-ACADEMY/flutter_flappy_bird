@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flappy_bird/view/widgets/bird.dart';
 import 'package:flappy_bird/view/widgets/piller_part.dart';
 import 'package:flappy_bird/view/widgets/score_board.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -16,7 +17,14 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Offset birdOffset = Offset.zero;
   late GlobalKey birdkey;
+  int score = -6;
   late final ScrollController worldScrollController;
+  ValueNotifier<int> score2 = ValueNotifier<int>(0);
+  void updateScore(int index) {
+    // setState(() {
+    score2.value = index;
+    // });
+  }
 
   @override
   void initState() {
@@ -59,8 +67,14 @@ class _HomePageState extends State<HomePage> {
             PillerPart(
               worldScrollController: worldScrollController,
               birdKey: birdkey,
+              updateScore: updateScore,
             ),
-            const ScoreBoard(),
+            ValueListenableBuilder<int>(
+              valueListenable: score2,
+              builder: (_, value, __) {
+                return ScoreBoard(score: value);
+              },
+            ),
             Positioned(
               top: MediaQuery.sizeOf(context).height * 0.5 - 25,
               left: MediaQuery.sizeOf(context).width * 0.5 - 105,
