@@ -23,13 +23,6 @@ class _PillerPartState extends State<PillerPart> {
 
   Timer? timer;
 
-  // @override
-  // void initState() {
-  //   final worldScrollController = ScrollController();
-
-  //   super.initState();
-  // }
-
   @override
   void didUpdateWidget(covariant PillerPart oldWidget) {
     timer?.cancel();
@@ -81,12 +74,15 @@ class _PillerPartState extends State<PillerPart> {
                     isTopPiller: false,
                     pillerHeight: pillerFullWidth - topPillerHeight),
                 Container(
-                    width: double.infinity,
-                    height: 100,
-                    decoration: const BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage("assets/Pasted image.png"),
-                            fit: BoxFit.fill))),
+                  width: double.infinity,
+                  height: 100,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/Pasted image.png"),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
               ],
             ),
           );
@@ -98,12 +94,15 @@ class _PillerPartState extends State<PillerPart> {
               children: [
                 const Spacer(),
                 Container(
-                    width: double.infinity,
-                    height: 100,
-                    decoration: const BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage("assets/Pasted image.png"),
-                            fit: BoxFit.fill))),
+                  width: double.infinity,
+                  height: 100,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/Pasted image.png"),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
               ],
             ),
           );
