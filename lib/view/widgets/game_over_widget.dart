@@ -1,7 +1,7 @@
 import 'package:flappy_bird/view/pages/starting_page.dart';
 import 'package:flutter/material.dart';
 
-void gameover(int hs, s, context) {
+void gameover(int highScore, int score, BuildContext context) {
   showDialog(
       context: context,
       builder: (context) {
@@ -34,9 +34,9 @@ void gameover(int hs, s, context) {
                           builder: (context) => const StartingPage()));
                 },
                 style: ButtonStyle(
-                  foregroundColor: WidgetStateProperty.all(
+                  foregroundColor: MaterialStateProperty.all(
                       Colors.red), // specify the text color here
-                  backgroundColor: WidgetStateProperty.all(
+                  backgroundColor: MaterialStateProperty.all(
                       Colors.green), // specify the background color here
                 ),
                 child: const Text('RESTART'),

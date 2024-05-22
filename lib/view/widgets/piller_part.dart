@@ -8,10 +8,12 @@ class PillerPart extends StatefulWidget {
   final GlobalKey birdKey;
   final ScrollController worldScrollController;
   final void Function(int index) updateScore;
+  final VoidCallback pauseGameCallback;
 
   const PillerPart({
     super.key,
     required this.birdKey,
+    required this.pauseGameCallback,
     required this.worldScrollController,
     required this.updateScore,
   });
@@ -26,37 +28,22 @@ class _PillerPartState extends State<PillerPart> {
 
   Timer? timer;
 
-  // @override
-  // void initState() {
-  //   final worldScrollController = ScrollController();
-
-  //   super.initState();
-  // }
-
   @override
-  void didUpdateWidget(covariant PillerPart oldWidget) {
-    timer?.cancel();
-    timer = null;
-
-    timer = Timer.periodic(const Duration(milliseconds: 10), (timer) {
-      widget.worldScrollController
-          .jumpTo(widget.worldScrollController.offset + 1);
-    });
-
-    super.didUpdateWidget(oldWidget);
+  void initState() {
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     late double pillerFullWidth = MediaQuery.of(context).size.height - 300;
+
     return ListView.builder(
       controller: widget.worldScrollController,
       scrollDirection: Axis.horizontal,
       itemBuilder: (context, index) {
         double topPillerHeight;
         customIndex = index;
-        Future.delayed(
-            Duration.zero, () => widget.updateScore((index / 2).ceil() - 3));
+
         if (heightCache[index % 100] == null) {
           topPillerHeight =
               Random().nextInt(pillerFullWidth.toInt()).toDouble();
@@ -90,6 +77,7 @@ class _PillerPartState extends State<PillerPart> {
               children: [
                 PillerWidget(
                   birdKey: widget.birdKey,
+                  pasueGameCallback: widget.pauseGameCallback,
                   worldScrollController: widget.worldScrollController,
                   isTopPiller: true,
                   pillerHeight: topPillerHeight,
@@ -98,6 +86,7 @@ class _PillerPartState extends State<PillerPart> {
                 const Spacer(),
                 PillerWidget(
                     pillerIndex: customIndex,
+                    pasueGameCallback: widget.pauseGameCallback,
                     birdKey: widget.birdKey,
                     worldScrollController: widget.worldScrollController,
                     isTopPiller: false,

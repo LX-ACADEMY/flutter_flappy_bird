@@ -20,48 +20,9 @@ class ScoreBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int scorelength = score.toString().length;
-    List<String> switchcheckingscore = score.toString().split('');
-    List<String> scorestorage = [];
-
-    for (int i = 0; i < scorelength; i++) {
-      switch (switchcheckingscore[i]) {
-        case '0':
-          scorestorage.add(numbers[0]);
-          break;
-        case '1':
-          scorestorage.add(numbers[1]);
-          break;
-
-        case '2':
-          scorestorage.add(numbers[2]);
-          break;
-
-        case '3':
-          scorestorage.add(numbers[3]);
-          break;
-
-        case '4':
-          scorestorage.add(numbers[4]);
-          break;
-
-        case '5':
-          scorestorage.add(numbers[5]);
-          break;
-
-        case '6':
-          scorestorage.add(numbers[6]);
-          break;
-        case '7':
-          scorestorage.add(numbers[7]);
-          break;
-        case '8':
-          scorestorage.add(numbers[8]);
-          break;
-        case '9':
-          scorestorage.add(numbers[9]);
-      }
-    }
+    List<String> scoreSplitted = score.toString().split('');
+    final scoreImages =
+        scoreSplitted.map((digit) => numbers[int.parse(digit)]).toList();
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -77,23 +38,21 @@ class ScoreBoard extends StatelessWidget {
             ),
           ),
         ),
-        // const Spacer(),
         SizedBox(
           height: 50,
           width: 300,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: scorelength,
+            itemCount: scoreImages.length,
             itemBuilder: (context, index) {
               return SizedBox(
                   height: 50,
                   width: 50,
-                  child: Image(image: AssetImage(scorestorage[index])));
+                  child: Image(image: AssetImage(scoreImages[index])));
             },
           ),
         ),
-        // const Spacer()
       ],
     );
   }

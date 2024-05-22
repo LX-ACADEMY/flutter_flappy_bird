@@ -7,34 +7,45 @@ class PillerWidget extends StatefulWidget {
   final ScrollController worldScrollController;
   final GlobalKey birdKey;
   final int pillerIndex;
+  final VoidCallback pasueGameCallback;
 
-  const PillerWidget(
-      {super.key,
-      required this.birdKey,
-      required this.worldScrollController,
-      required this.isTopPiller,
-      required this.pillerHeight,
-      required this.pillerIndex});
+  const PillerWidget({
+    super.key,
+    required this.birdKey,
+    required this.worldScrollController,
+    required this.isTopPiller,
+    required this.pillerHeight,
+    required this.pillerIndex,
+    required this.pasueGameCallback,
+  });
 
   @override
   State<PillerWidget> createState() => _PillerWidgetState();
 }
 
 class _PillerWidgetState extends State<PillerWidget> {
+  late bool isGamePaused;
+
   @override
   void initState() {
     widget.worldScrollController.addListener(checkPillerCollision);
-    widget.worldScrollController.addListener(checkGroundCollision);
+    isGamePaused = false;
 
     super.initState();
   }
 
   @override
   void dispose() {
-    widget.worldScrollController.removeListener(checkPillerCollision);
-    widget.worldScrollController.removeListener(checkGroundCollision);
+    removeListeners();
 
     super.dispose();
+  }
+
+  /// Remove all collision listeners
+  void removeListeners() {
+    widget.worldScrollController.removeListener(checkPillerCollision);
+
+    widget.pasueGameCallback();
   }
 
   void checkPillerCollision() {
@@ -48,7 +59,6 @@ class _PillerWidgetState extends State<PillerWidget> {
     final birdWidth = birdBox.size.width;
 
     final pillertopleft = pillerBox.localToGlobal(Offset.zero);
-    // final pillertopright = pillerBox.localToGlobal(Offset(pillerWidth, 0));
     final pillerbottomleft = pillerBox.localToGlobal(Offset(0, pillerHeight));
     final pillerbottomright =
         pillerBox.localToGlobal(Offset(pillerWidth, pillerHeight));
@@ -63,35 +73,27 @@ class _PillerWidgetState extends State<PillerWidget> {
                 birdbottomleft.dx <= pillerbottomright.dx) ||
             (birdtopright.dx >= pillerbottomleft.dx &&
                 birdtopright.dx <= pillerbottomright.dx)) &&
-        // (birdbottomleft.dx >= pillertopleft.dx &&
-        //     birdbottomleft.dx <= pillertopright.dx) ||
-        // (birdbottomright.dx >= pillertopleft.dx &&
-        //     birdbottomright.dx <= pillertopright.dx) ||
         ((birdtopright.dy >= pillertopleft.dy &&
                 birdtopright.dy <= pillerbottomright.dy) ||
             (birdbottomright.dy >= pillertopleft.dy &&
                 birdbottomright.dy <= pillerbottomright.dy))) {
-      gameover(20, 5, context);
+      showGameOverScreen();
     }
 
     if ((birdtopleft.dy <= 0) && (widget.pillerIndex % 2 == 1)) {
-      gameover(20, 5, context);
+      showGameOverScreen();
     }
   }
 
-  void checkGroundCollision() {
-    final birdBox =
-        widget.birdKey.currentContext!.findRenderObject() as RenderBox;
+  /// Show game over screen
+  void showGameOverScreen() {
+    removeListeners();
 
-    final birdHeight = birdBox.size.height;
-
-    final Offset screensize =
-        Offset(0, MediaQuery.of(context).size.height - 100);
-    final birdbottomleft = birdBox.localToGlobal(Offset(0, birdHeight));
-
-    if ((birdbottomleft.dy >= (screensize).dy)) {
-      gameover(30, 8, context);
+    if (!isGamePaused) {
+      gameover(20, 5, context);
     }
+
+    isGamePaused = true;
   }
 
   @override
