@@ -6,9 +6,9 @@ class PillerWidget extends StatefulWidget {
   final bool isTopPiller;
   final ScrollController worldScrollController;
   final GlobalKey birdKey;
-  late int pillerIndex;
+  final int pillerIndex;
 
-  PillerWidget(
+  const PillerWidget(
       {super.key,
       required this.birdKey,
       required this.worldScrollController,

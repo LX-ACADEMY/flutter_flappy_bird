@@ -14,9 +14,9 @@ class ScoreBoard extends StatelessWidget {
     'assets/numbers/8.png',
     'assets/numbers/9.png',
   ];
-  final int score = 0123;
+  final int score;
 
-  ScoreBoard({super.key});
+  ScoreBoard({super.key, required this.score});
 
   @override
   Widget build(BuildContext context) {
