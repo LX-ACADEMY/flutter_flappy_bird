@@ -6,6 +6,8 @@ class PillerWidget extends StatefulWidget {
   final bool isTopPiller;
   final ScrollController worldScrollController;
   final GlobalKey birdKey;
+  final int pillerIndex;
+  final VoidCallback pasueGameCallback;
 
   const PillerWidget({
     super.key,
@@ -13,6 +15,8 @@ class PillerWidget extends StatefulWidget {
     required this.worldScrollController,
     required this.isTopPiller,
     required this.pillerHeight,
+    required this.pillerIndex,
+    required this.pasueGameCallback,
   });
 
   @override
@@ -20,18 +24,28 @@ class PillerWidget extends StatefulWidget {
 }
 
 class _PillerWidgetState extends State<PillerWidget> {
+  late bool isGamePaused;
+
   @override
   void initState() {
     widget.worldScrollController.addListener(checkPillerCollision);
+    isGamePaused = false;
 
     super.initState();
   }
 
   @override
   void dispose() {
-    widget.worldScrollController.removeListener(checkPillerCollision);
+    removeListeners();
 
     super.dispose();
+  }
+
+  /// Remove all collision listeners
+  void removeListeners() {
+    widget.worldScrollController.removeListener(checkPillerCollision);
+
+    widget.pasueGameCallback();
   }
 
   void checkPillerCollision() {
@@ -63,8 +77,23 @@ class _PillerWidgetState extends State<PillerWidget> {
                 birdtopright.dy <= pillerbottomright.dy) ||
             (birdbottomright.dy >= pillertopleft.dy &&
                 birdbottomright.dy <= pillerbottomright.dy))) {
+      showGameOverScreen();
+    }
+
+    if ((birdtopleft.dy <= 0) && (widget.pillerIndex % 2 == 1)) {
+      showGameOverScreen();
+    }
+  }
+
+  /// Show game over screen
+  void showGameOverScreen() {
+    removeListeners();
+
+    if (!isGamePaused) {
       gameover(20, 5, context);
     }
+
+    isGamePaused = true;
   }
 
   @override

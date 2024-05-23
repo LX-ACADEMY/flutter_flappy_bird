@@ -1,7 +1,7 @@
-import 'package:flappy_bird/view/pages/home_page.dart';
+import 'package:flappy_bird/view/pages/starting_page.dart';
 import 'package:flutter/material.dart';
 
-void gameover(int hs, s, context) {
+void gameover(int highScore, int score, BuildContext context) {
   showDialog(
       context: context,
       builder: (context) {
@@ -31,7 +31,7 @@ void gameover(int hs, s, context) {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const HomePage()));
+                          builder: (context) => const StartingPage()));
                 },
                 style: ButtonStyle(
                   foregroundColor: MaterialStateProperty.all(

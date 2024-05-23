@@ -7,11 +7,15 @@ import 'package:flutter/material.dart';
 class PillerPart extends StatefulWidget {
   final GlobalKey birdKey;
   final ScrollController worldScrollController;
+  final void Function(int index) updateScore;
+  final VoidCallback pauseGameCallback;
 
   const PillerPart({
     super.key,
     required this.birdKey,
+    required this.pauseGameCallback,
     required this.worldScrollController,
+    required this.updateScore,
   });
 
   @override
@@ -20,20 +24,13 @@ class PillerPart extends StatefulWidget {
 
 class _PillerPartState extends State<PillerPart> {
   final heightCache = List<double?>.generate(100, (index) => null);
+  late int customIndex;
 
   Timer? timer;
 
   @override
-  void didUpdateWidget(covariant PillerPart oldWidget) {
-    timer?.cancel();
-    timer = null;
-
-    timer = Timer.periodic(const Duration(milliseconds: 10), (timer) {
-      widget.worldScrollController
-          .jumpTo(widget.worldScrollController.offset + 1);
-    });
-
-    super.didUpdateWidget(oldWidget);
+  void initState() {
+    super.initState();
   }
 
   @override
@@ -45,6 +42,7 @@ class _PillerPartState extends State<PillerPart> {
       scrollDirection: Axis.horizontal,
       itemBuilder: (context, index) {
         double topPillerHeight;
+        customIndex = index;
 
         if (heightCache[index % 100] == null) {
           topPillerHeight =
@@ -53,8 +51,24 @@ class _PillerPartState extends State<PillerPart> {
         } else {
           topPillerHeight = heightCache[index % 100]!;
         }
-
-        if (index % 2 == 1) {
+        if (index < 3) {
+          return SizedBox(
+            height: double.infinity,
+            width: 200,
+            child: Column(
+              children: [
+                const Spacer(),
+                Container(
+                    width: double.infinity,
+                    height: 100,
+                    decoration: const BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage("assets/Pasted image.png"),
+                            fit: BoxFit.fill))),
+              ],
+            ),
+          );
+        } else if (index % 2 == 1) {
           return Container(
             height: double.infinity,
             color: Colors.transparent,
@@ -63,12 +77,16 @@ class _PillerPartState extends State<PillerPart> {
               children: [
                 PillerWidget(
                   birdKey: widget.birdKey,
+                  pasueGameCallback: widget.pauseGameCallback,
                   worldScrollController: widget.worldScrollController,
                   isTopPiller: true,
                   pillerHeight: topPillerHeight,
+                  pillerIndex: customIndex,
                 ),
                 const Spacer(),
                 PillerWidget(
+                    pillerIndex: customIndex,
+                    pasueGameCallback: widget.pauseGameCallback,
                     birdKey: widget.birdKey,
                     worldScrollController: widget.worldScrollController,
                     isTopPiller: false,
