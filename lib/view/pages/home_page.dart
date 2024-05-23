@@ -43,6 +43,7 @@ class _HomePageState extends State<HomePage> {
   void dispose() {
     worldScrollController.dispose();
     _birdGravityTimer.cancel();
+    _wordScrollTimer.cancel();
 
     super.dispose();
   }
