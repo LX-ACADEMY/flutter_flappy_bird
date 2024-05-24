@@ -129,7 +129,7 @@ class _HomePageState extends State<HomePage> {
       child: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/bj.png'), fit: BoxFit.fill)),
+                image: AssetImage('assets/background.png'), fit: BoxFit.fill)),
         height: double.infinity,
         width: double.infinity,
         child: Stack(

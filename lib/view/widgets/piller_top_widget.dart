@@ -104,8 +104,8 @@ class _PillerWidgetState extends State<PillerWidget> {
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage(widget.isTopPiller
-              ? "assets/Pasted image (2).png"
-              : "assets/Pasted image (3).png"),
+              ? "assets/top_piller.png"
+              : "assets/bottom_piller.png"),
           fit: BoxFit.fitWidth,
           alignment: widget.isTopPiller
               ? FractionalOffset.bottomCenter
