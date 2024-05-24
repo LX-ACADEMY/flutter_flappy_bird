@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class WorldPartWidget extends StatefulWidget {
   final GlobalKey birdKey;
   final ScrollController worldScrollController;
-  final void Function(int index) updateScore;
+  final VoidCallback updateScore;
   final VoidCallback pauseGameCallback;
 
   const WorldPartWidget({
@@ -78,9 +78,11 @@ class _WorldPartWidgetState extends State<WorldPartWidget> {
                   isTopPiller: true,
                   pillerHeight: topPillerHeight,
                   pillerIndex: index,
+                  updateScoreCallback: widget.updateScore,
                 ),
                 const Spacer(),
                 PillerWidget(
+                    updateScoreCallback: widget.updateScore,
                     pillerIndex: index,
                     pasueGameCallback: widget.pauseGameCallback,
                     birdKey: widget.birdKey,

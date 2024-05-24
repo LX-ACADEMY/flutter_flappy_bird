@@ -10,6 +10,7 @@ class PillerWidget extends StatefulWidget {
   final GlobalKey birdKey;
   final int pillerIndex;
   final VoidCallback pasueGameCallback;
+  final VoidCallback updateScoreCallback;
 
   const PillerWidget({
     super.key,
@@ -19,6 +20,7 @@ class PillerWidget extends StatefulWidget {
     required this.pillerHeight,
     required this.pillerIndex,
     required this.pasueGameCallback,
+    required this.updateScoreCallback,
   });
 
   @override
@@ -27,11 +29,19 @@ class PillerWidget extends StatefulWidget {
 
 class _PillerWidgetState extends State<PillerWidget> {
   late bool isGamePaused;
+  late bool isBirdPassedPiller;
 
   @override
   void initState() {
     // widget.worldScrollController.addListener(checkPillerCollision);
+
+    /// If the widget is top piller, we will check if the bird has passed the piller
+    if (widget.isTopPiller) {
+      widget.worldScrollController.addListener(checkBirdPassedPiller);
+    }
+
     isGamePaused = false;
+    isBirdPassedPiller = false;
 
     super.initState();
   }
@@ -39,6 +49,7 @@ class _PillerWidgetState extends State<PillerWidget> {
   @override
   void dispose() {
     widget.worldScrollController.removeListener(checkPillerCollision);
+    widget.worldScrollController.removeListener(checkBirdPassedPiller);
 
     super.dispose();
   }
@@ -48,6 +59,29 @@ class _PillerWidgetState extends State<PillerWidget> {
     widget.worldScrollController.removeListener(checkPillerCollision);
 
     widget.pasueGameCallback();
+  }
+
+  /// Check if the bird has passed the piller
+  /// and update the score
+  void checkBirdPassedPiller() {
+    if (isBirdPassedPiller) {
+      return;
+    }
+
+    final birdBox =
+        widget.birdKey.currentContext!.findRenderObject() as RenderBox;
+    final birdtopleft = birdBox.localToGlobal(Offset.zero);
+
+    final pillerBox = context.findRenderObject() as RenderBox;
+    final pillerWidth = pillerBox.size.width;
+    final pillerTopRight = pillerBox.localToGlobal(Offset(pillerWidth, 0));
+
+    if (birdtopleft.dx > pillerTopRight.dx) {
+      isBirdPassedPiller = true;
+
+      widget.updateScoreCallback();
+      widget.worldScrollController.removeListener(checkBirdPassedPiller);
+    }
   }
 
   void checkPillerCollision() {
