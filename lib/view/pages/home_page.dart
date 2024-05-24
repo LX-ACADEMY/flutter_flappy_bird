@@ -16,14 +16,19 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late Offset birdOffset;
   late GlobalKey birdKey;
-  late final ScrollController worldScrollController;
   late Timer _birdGravityTimer;
   late Timer _wordScrollTimer;
+  late final ScrollController worldScrollController;
 
   /// Indicate if the game is already paused
   late bool isPaused;
 
-  int score = 0;
+  /// State to store the score of the game
+  /// Default value is 0
+  late int score;
+
+  /// High score of the game
+  late int highScore;
 
   @override
   void initState() {
@@ -31,6 +36,9 @@ class _HomePageState extends State<HomePage> {
     birdOffset = Offset.zero;
     birdKey = GlobalKey();
     isPaused = false;
+
+    score = 0;
+    highScore = 0;
 
     resumeGame(true);
 
@@ -104,10 +112,10 @@ class _HomePageState extends State<HomePage> {
     }).then((value) => _wordScrollTimer = value);
   }
 
-  /// Update the score
-  void updateScore(int newScore) {
+  /// Increment the score
+  void updateScore() {
     setState(() {
-      score = newScore;
+      score++;
     });
   }
 

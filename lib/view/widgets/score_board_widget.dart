@@ -35,12 +35,12 @@ class ScoreBoardWidget extends StatelessWidget {
     final scoreImages =
         scoreSplitted.map((digit) => numbers[int.parse(digit)]).toList();
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: GestureDetector(
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 32),
+      height: 100,
+      child: Row(
+        children: [
+          GestureDetector(
             onTap: () {
               if (isPaused) {
                 resumeGameCallback();
@@ -59,11 +59,9 @@ class ScoreBoardWidget extends StatelessWidget {
               ),
             ),
           ),
-        ),
-        SizedBox(
-          height: 50,
-          width: 300,
-          child: ListView.builder(
+          const Spacer(),
+          ListView.builder(
+            shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: scoreImages.length,
@@ -74,8 +72,8 @@ class ScoreBoardWidget extends StatelessWidget {
                   child: Image(image: AssetImage(scoreImages[index])));
             },
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
