@@ -4,9 +4,7 @@ import 'package:flappy_bird/view/widgets/bird_widget.dart';
 import 'package:flappy_bird/view/widgets/game_over_widget.dart';
 import 'package:flappy_bird/view/widgets/world_part_widget.dart';
 import 'package:flappy_bird/view/widgets/score_board_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

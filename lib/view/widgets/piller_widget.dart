@@ -103,34 +103,21 @@ class _PillerWidgetState extends State<PillerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // return Container(
-    //   width: 100,
-    //   height: widget.pillerHeight,
-    //   decoration: BoxDecoration(
-    //     image: DecorationImage(
-    //       image: AssetImage(widget.isTopPiller
-    //           ? "assets/top_piller.png"
-    //           : "assets/bottom_piller.png"),
-    //       fit: BoxFit.fitWidth,
-    //       alignment: widget.isTopPiller
-    //           ? FractionalOffset.bottomCenter
-    //           : FractionalOffset.topCenter,
-    //     ),
-    //   ),
-    // );
-
     return SizedBox(
       width: 100,
       height: widget.pillerHeight,
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        // mainAxisSize: MainAxisSize.min,
         children: [
           if (!widget.isTopPiller)
-            SizedBox(
-              width: 100,
-              child: Image.asset(
-                'assets/img_pipe_head.png',
-                fit: BoxFit.fitWidth,
+            Container(
+              height: min(50, widget.pillerHeight),
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/img_pipe_head.png'),
+                  fit: BoxFit.fitWidth,
+                  alignment: Alignment.topCenter,
+                ),
               ),
             ),
           Expanded(
@@ -146,11 +133,14 @@ class _PillerWidgetState extends State<PillerWidget> {
             Transform(
               alignment: Alignment.center,
               transform: Matrix4.rotationY(pi)..rotateZ(pi),
-              child: SizedBox(
-                width: 100,
-                child: Image.asset(
-                  'assets/img_pipe_head.png',
-                  fit: BoxFit.fitWidth,
+              child: Container(
+                height: min(50, widget.pillerHeight),
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/img_pipe_head.png'),
+                    fit: BoxFit.fitWidth,
+                    alignment: Alignment.topCenter,
+                  ),
                 ),
               ),
             ),

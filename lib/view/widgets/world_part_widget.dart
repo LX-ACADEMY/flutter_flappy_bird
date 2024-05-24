@@ -66,9 +66,8 @@ class _WorldPartWidgetState extends State<WorldPartWidget> {
         } else {
           /// Show the up and down pillers
 
-          return Container(
+          return SizedBox(
             height: double.infinity,
-            color: Colors.transparent,
             width: 100,
             child: Column(
               children: [
