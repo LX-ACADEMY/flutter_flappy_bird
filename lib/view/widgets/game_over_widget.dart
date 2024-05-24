@@ -42,9 +42,9 @@ class GameOverWidget extends StatelessWidget {
                       builder: (context) => const StartingPage()));
             },
             style: const ButtonStyle(
-              foregroundColor: WidgetStatePropertyAll(
+              foregroundColor: MaterialStatePropertyAll(
                   Colors.red), // specify the text color here
-              backgroundColor: WidgetStatePropertyAll(
+              backgroundColor: MaterialStatePropertyAll(
                   Colors.green), // specify the background color here
             ),
             child: const Text('RESTART'),
