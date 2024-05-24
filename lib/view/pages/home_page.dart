@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:flappy_bird/view/widgets/bird.dart';
+import 'package:flappy_bird/view/widgets/bird_widget.dart';
 import 'package:flappy_bird/view/widgets/game_over_widget.dart';
-import 'package:flappy_bird/view/widgets/piller_part.dart';
-import 'package:flappy_bird/view/widgets/score_board.dart';
+import 'package:flappy_bird/view/widgets/world_part_widget.dart';
+import 'package:flappy_bird/view/widgets/score_board_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -58,7 +58,10 @@ class _HomePageState extends State<HomePage> {
 
     if ((birdbottomleft.dy >= screensize.dy)) {
       pauseGame();
-      gameover(0, score, context);
+      showDialog(
+        context: context,
+        builder: (context) => GameOverWidget(highScore: 0, score: score),
+      );
     }
   }
 
@@ -134,13 +137,13 @@ class _HomePageState extends State<HomePage> {
         width: double.infinity,
         child: Stack(
           children: [
-            PillerPart(
+            WorldPartWidget(
               pauseGameCallback: pauseGame,
               worldScrollController: worldScrollController,
               birdKey: birdKey,
               updateScore: updateScore,
             ),
-            ScoreBoard(
+            ScoreBoardWidget(
               isPaused: isPaused,
               pauseGameCallback: pauseGame,
               resumeGameCallback: resumeGame,
@@ -151,7 +154,7 @@ class _HomePageState extends State<HomePage> {
               left: MediaQuery.sizeOf(context).width * 0.5 - 105,
               child: Transform.translate(
                 offset: birdOffset,
-                child: Bird(
+                child: BirdWidget(
                   isPaused: isPaused,
                   key: birdKey,
                 ),

@@ -2,13 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class ScoreBoard extends StatelessWidget {
+class ScoreBoardWidget extends StatelessWidget {
   final VoidCallback resumeGameCallback;
   final VoidCallback pauseGameCallback;
   final bool isPaused;
   final int score;
 
-  ScoreBoard({
+  ScoreBoardWidget({
     super.key,
     required this.isPaused,
     required this.score,

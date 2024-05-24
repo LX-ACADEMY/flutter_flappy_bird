@@ -2,19 +2,19 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-class Bird extends StatefulWidget {
+class BirdWidget extends StatefulWidget {
   final bool isPaused;
 
-  const Bird({
+  const BirdWidget({
     super.key,
     required this.isPaused,
   });
 
   @override
-  State<Bird> createState() => _BirdState();
+  State<BirdWidget> createState() => _BirdWidgetState();
 }
 
-class _BirdState extends State<Bird> {
+class _BirdWidgetState extends State<BirdWidget> {
   var list = ["assets/birddf.png", "assets/birdmf.png", "assets/birduf.png"];
   int i = 0;
   Timer? _birdWingsTimer;
@@ -27,7 +27,7 @@ class _BirdState extends State<Bird> {
   }
 
   @override
-  void didUpdateWidget(covariant Bird oldWidget) {
+  void didUpdateWidget(covariant BirdWidget oldWidget) {
     if (widget.isPaused) {
       stopBirdAnimation();
     } else {

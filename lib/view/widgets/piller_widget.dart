@@ -92,7 +92,10 @@ class _PillerWidgetState extends State<PillerWidget> {
     removeListeners();
 
     if (!isGamePaused) {
-      gameover(20, 5, context);
+      showDialog(
+        context: context,
+        builder: (context) => const GameOverWidget(highScore: 0, score: 0),
+      );
     }
 
     isGamePaused = true;

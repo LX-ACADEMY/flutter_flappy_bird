@@ -1,16 +1,16 @@
 import 'dart:async';
 
 import 'package:flappy_bird/view/widgets/floor_widget.dart';
-import 'package:flappy_bird/view/widgets/piller_top_widget.dart';
+import 'package:flappy_bird/view/widgets/piller_widget.dart';
 import 'package:flutter/material.dart';
 
-class PillerPart extends StatefulWidget {
+class WorldPartWidget extends StatefulWidget {
   final GlobalKey birdKey;
   final ScrollController worldScrollController;
   final void Function(int index) updateScore;
   final VoidCallback pauseGameCallback;
 
-  const PillerPart({
+  const WorldPartWidget({
     super.key,
     required this.birdKey,
     required this.pauseGameCallback,
@@ -19,10 +19,10 @@ class PillerPart extends StatefulWidget {
   });
 
   @override
-  State<PillerPart> createState() => _PillerPartState();
+  State<WorldPartWidget> createState() => _WorldPartWidgetState();
 }
 
-class _PillerPartState extends State<PillerPart> {
+class _WorldPartWidgetState extends State<WorldPartWidget> {
   final heightCache = List<double?>.generate(100, (index) => null);
   late int customIndex;
 
