@@ -15,8 +15,13 @@ class BirdWidget extends StatefulWidget {
 }
 
 class _BirdWidgetState extends State<BirdWidget> {
-  var list = ["assets/birddf.png", "assets/birdmf.png", "assets/birduf.png"];
-  int i = 0;
+  var birdImages = [
+    "assets/birddf.png",
+    "assets/birdmf.png",
+    "assets/birduf.png",
+  ];
+
+  int currentlyShownImage = 0;
   Timer? _birdWingsTimer;
 
   @override
@@ -30,7 +35,7 @@ class _BirdWidgetState extends State<BirdWidget> {
   void didUpdateWidget(covariant BirdWidget oldWidget) {
     if (widget.isPaused) {
       stopBirdAnimation();
-    } else {
+    } else if (_birdWingsTimer == null) {
       startBirdAnimation();
     }
 
@@ -45,14 +50,16 @@ class _BirdWidgetState extends State<BirdWidget> {
     _birdWingsTimer =
         Timer.periodic(const Duration(milliseconds: 100), (timer) {
       setState(() {
-        i = timer.tick % list.length;
+        currentlyShownImage = timer.tick % birdImages.length;
       });
     });
   }
 
   void stopBirdAnimation() {
-    _birdWingsTimer?.cancel();
-    _birdWingsTimer = null;
+    if (_birdWingsTimer != null) {
+      _birdWingsTimer?.cancel();
+      _birdWingsTimer = null;
+    }
   }
 
   @override
@@ -64,7 +71,7 @@ class _BirdWidgetState extends State<BirdWidget> {
           color: Colors.transparent,
           shape: BoxShape.circle,
           image: DecorationImage(
-            image: AssetImage(list[i]),
+            image: AssetImage(birdImages[currentlyShownImage]),
             fit: BoxFit.fill,
           )),
     );
