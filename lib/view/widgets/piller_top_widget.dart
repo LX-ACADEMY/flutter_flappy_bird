@@ -36,7 +36,7 @@ class _PillerWidgetState extends State<PillerWidget> {
 
   @override
   void dispose() {
-    removeListeners();
+    widget.worldScrollController.removeListener(checkPillerCollision);
 
     super.dispose();
   }
