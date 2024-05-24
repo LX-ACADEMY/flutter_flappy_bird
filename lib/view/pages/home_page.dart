@@ -66,7 +66,8 @@ class _HomePageState extends State<HomePage> {
       pauseGame();
       showDialog(
         context: context,
-        builder: (context) => GameOverWidget(highScore: 0, score: score),
+        builder: (context) =>
+            GameOverWidget(highScore: highScore, score: score),
       );
     }
   }
@@ -94,10 +95,10 @@ class _HomePageState extends State<HomePage> {
 
     /// Bird gravity movement start
     _birdGravityTimer = Timer.periodic(
-      const Duration(milliseconds: 90),
+      const Duration(milliseconds: 10),
       (timer) {
         setState(() {
-          birdOffset = Offset(birdOffset.dx, birdOffset.dy + 10);
+          birdOffset = Offset(birdOffset.dx, birdOffset.dy + 2.5);
         });
 
         checkGroundCollision();
@@ -116,6 +117,10 @@ class _HomePageState extends State<HomePage> {
   void updateScore() {
     setState(() {
       score++;
+
+      if (score > highScore) {
+        highScore = score;
+      }
     });
   }
 
@@ -144,6 +149,8 @@ class _HomePageState extends State<HomePage> {
         child: Stack(
           children: [
             WorldPartWidget(
+              score: score,
+              highScore: highScore,
               pauseGameCallback: pauseGame,
               worldScrollController: worldScrollController,
               birdKey: birdKey,
@@ -154,6 +161,7 @@ class _HomePageState extends State<HomePage> {
               pauseGameCallback: pauseGame,
               resumeGameCallback: resumeGame,
               score: score,
+              highScore: highScore,
             ),
             Positioned(
               top: MediaQuery.sizeOf(context).height * 0.5 - 25,

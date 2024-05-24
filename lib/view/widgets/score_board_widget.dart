@@ -1,3 +1,4 @@
+import 'package:flappy_bird/view/widgets/score_number_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -7,34 +8,19 @@ class ScoreBoardWidget extends StatelessWidget {
   final VoidCallback pauseGameCallback;
   final bool isPaused;
   final int score;
+  final int highScore;
 
-  ScoreBoardWidget({
+  const ScoreBoardWidget({
     super.key,
     required this.isPaused,
     required this.score,
+    required this.highScore,
     required this.resumeGameCallback,
     required this.pauseGameCallback,
   });
 
-  final List<String> numbers = [
-    'assets/numbers/0.png',
-    'assets/numbers/1.png',
-    'assets/numbers/2.png',
-    'assets/numbers/3.png',
-    'assets/numbers/4.png',
-    'assets/numbers/5.png',
-    'assets/numbers/6.png',
-    'assets/numbers/7.png',
-    'assets/numbers/8.png',
-    'assets/numbers/9.png',
-  ];
-
   @override
   Widget build(BuildContext context) {
-    List<String> scoreSplitted = score.toString().split('');
-    final scoreImages =
-        scoreSplitted.map((digit) => numbers[int.parse(digit)]).toList();
-
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 32),
       height: 100,
@@ -60,18 +46,7 @@ class ScoreBoardWidget extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          ListView.builder(
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: scoreImages.length,
-            itemBuilder: (context, index) {
-              return SizedBox(
-                  height: 50,
-                  width: 50,
-                  child: Image(image: AssetImage(scoreImages[index])));
-            },
-          ),
+          ScoreNumberWidget(score: score),
         ],
       ),
     );

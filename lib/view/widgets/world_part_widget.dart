@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flappy_bird/view/widgets/floor_widget.dart';
 import 'package:flappy_bird/view/widgets/piller_widget.dart';
@@ -9,6 +10,8 @@ class WorldPartWidget extends StatefulWidget {
   final ScrollController worldScrollController;
   final VoidCallback updateScore;
   final VoidCallback pauseGameCallback;
+  final int score;
+  final int highScore;
 
   const WorldPartWidget({
     super.key,
@@ -16,6 +19,8 @@ class WorldPartWidget extends StatefulWidget {
     required this.pauseGameCallback,
     required this.worldScrollController,
     required this.updateScore,
+    required this.score,
+    required this.highScore,
   });
 
   @override
@@ -43,9 +48,8 @@ class _WorldPartWidgetState extends State<WorldPartWidget> {
         /// Fetch the top piller height from cache if it exists
         double topPillerHeight;
         if (heightCache[index % 100] == null) {
-          // topPillerHeight =
-          //     Random().nextInt(pillerFullWidth.toInt()).toDouble();
-          topPillerHeight = pillerFullWidth * 0.99;
+          topPillerHeight =
+              Random().nextInt(pillerFullWidth.toInt()).toDouble();
           heightCache[index % 100] = topPillerHeight;
         } else {
           topPillerHeight = heightCache[index % 100]!;
@@ -72,6 +76,8 @@ class _WorldPartWidgetState extends State<WorldPartWidget> {
             child: Column(
               children: [
                 PillerWidget(
+                  score: widget.score,
+                  highScore: widget.highScore,
                   birdKey: widget.birdKey,
                   pasueGameCallback: widget.pauseGameCallback,
                   worldScrollController: widget.worldScrollController,
@@ -82,6 +88,8 @@ class _WorldPartWidgetState extends State<WorldPartWidget> {
                 ),
                 const Spacer(),
                 PillerWidget(
+                    score: widget.score,
+                    highScore: widget.highScore,
                     updateScoreCallback: widget.updateScore,
                     pillerIndex: index,
                     pasueGameCallback: widget.pauseGameCallback,

@@ -11,6 +11,8 @@ class PillerWidget extends StatefulWidget {
   final int pillerIndex;
   final VoidCallback pasueGameCallback;
   final VoidCallback updateScoreCallback;
+  final int score;
+  final int highScore;
 
   const PillerWidget({
     super.key,
@@ -21,6 +23,8 @@ class PillerWidget extends StatefulWidget {
     required this.pillerIndex,
     required this.pasueGameCallback,
     required this.updateScoreCallback,
+    required this.score,
+    required this.highScore,
   });
 
   @override
@@ -33,7 +37,7 @@ class _PillerWidgetState extends State<PillerWidget> {
 
   @override
   void initState() {
-    // widget.worldScrollController.addListener(checkPillerCollision);
+    widget.worldScrollController.addListener(checkPillerCollision);
 
     /// If the widget is top piller, we will check if the bird has passed the piller
     if (widget.isTopPiller) {
@@ -128,7 +132,10 @@ class _PillerWidgetState extends State<PillerWidget> {
     if (!isGamePaused) {
       showDialog(
         context: context,
-        builder: (context) => const GameOverWidget(highScore: 0, score: 0),
+        builder: (context) => GameOverWidget(
+          highScore: widget.highScore,
+          score: widget.score,
+        ),
       );
     }
 
