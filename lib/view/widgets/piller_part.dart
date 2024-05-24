@@ -63,7 +63,7 @@ class _PillerPartState extends State<PillerPart> {
                     height: 100,
                     decoration: const BoxDecoration(
                         image: DecorationImage(
-                            image: AssetImage("assets/Pasted image.png"),
+                            image: AssetImage("assets/floor.png"),
                             fit: BoxFit.fill))),
               ],
             ),
@@ -96,7 +96,7 @@ class _PillerPartState extends State<PillerPart> {
                     height: 100,
                     decoration: const BoxDecoration(
                         image: DecorationImage(
-                            image: AssetImage("assets/Pasted image.png"),
+                            image: AssetImage("assets/floor.png"),
                             fit: BoxFit.fill))),
               ],
             ),
@@ -113,7 +113,7 @@ class _PillerPartState extends State<PillerPart> {
                     height: 100,
                     decoration: const BoxDecoration(
                         image: DecorationImage(
-                            image: AssetImage("assets/Pasted image.png"),
+                            image: AssetImage("assets/floor.png"),
                             fit: BoxFit.fill))),
               ],
             ),

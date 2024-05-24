@@ -33,10 +33,10 @@ void gameover(int highScore, int score, BuildContext context) {
                       MaterialPageRoute(
                           builder: (context) => const StartingPage()));
                 },
-                style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all(
+                style: const ButtonStyle(
+                  foregroundColor: WidgetStatePropertyAll(
                       Colors.red), // specify the text color here
-                  backgroundColor: MaterialStateProperty.all(
+                  backgroundColor: WidgetStatePropertyAll(
                       Colors.green), // specify the background color here
                 ),
                 child: const Text('RESTART'),
