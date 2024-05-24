@@ -110,15 +110,22 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  /// Fly the bird upward
+  void flyBird() {
+    /// If the game is already paused, then do nothing
+    if (isPaused) {
+      return;
+    }
+
+    setState(() {
+      birdOffset = Offset(birdOffset.dx, birdOffset.dy - 70);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        /// Bird fly up
-        setState(() {
-          birdOffset = Offset(birdOffset.dx, birdOffset.dy - 70);
-        });
-      },
+      onTap: flyBird,
       child: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(
