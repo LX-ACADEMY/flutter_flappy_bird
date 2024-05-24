@@ -57,28 +57,23 @@ class GameOverWidget extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          TextButton(
-            onPressed: () {
-              Navigator.push(
+          GestureDetector(
+            onTap: () {
+              Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const StartingPage()));
+                    builder: (context) => const StartingPage(),
+                  ), (route) {
+                return false;
+              });
             },
-            style: const ButtonStyle(
-              backgroundColor: WidgetStatePropertyAll(
-                Colors.white,
-              ), // specify the background color here
+            child: SizedBox(
+              width: 140,
+              child: Image.asset(
+                'assets/img_btn_restart.png',
+              ),
             ),
-            child: const Padding(
-              padding: EdgeInsets.all(16),
-              child: Text('RESTART',
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.red,
-                    fontWeight: FontWeight.w800,
-                  )),
-            ),
-          ),
+          )
         ],
       ),
     );
