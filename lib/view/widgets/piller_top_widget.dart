@@ -28,7 +28,7 @@ class _PillerWidgetState extends State<PillerWidget> {
 
   @override
   void initState() {
-    widget.worldScrollController.addListener(checkPillerCollision);
+    // widget.worldScrollController.addListener(checkPillerCollision);
     isGamePaused = false;
 
     super.initState();
