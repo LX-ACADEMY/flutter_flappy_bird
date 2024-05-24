@@ -1,6 +1,5 @@
 import 'package:flappy_bird/view/pages/starting_page.dart';
 import 'package:flappy_bird/view/widgets/score_number_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class GameOverWidget extends StatelessWidget {
