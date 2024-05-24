@@ -48,11 +48,13 @@ class ScoreBoard extends StatelessWidget {
                 pauseGameCallback();
               }
             },
-            child: const SizedBox(
+            child: SizedBox(
               height: 35,
               width: 35,
               child: Image(
-                image: AssetImage('assets/pause.png'),
+                image: AssetImage(isPaused
+                    ? 'assets/img_btn_resume.png'
+                    : 'assets/pause.png'),
                 fit: BoxFit.cover,
               ),
             ),
