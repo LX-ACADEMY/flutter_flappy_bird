@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'dart:math';
 
+import 'package:flappy_bird/view/widgets/floor_widget.dart';
 import 'package:flappy_bird/view/widgets/piller_top_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -41,34 +41,32 @@ class _PillerPartState extends State<PillerPart> {
       controller: widget.worldScrollController,
       scrollDirection: Axis.horizontal,
       itemBuilder: (context, index) {
+        /// Fetch the top piller height from cache if it exists
         double topPillerHeight;
-        customIndex = index;
-
         if (heightCache[index % 100] == null) {
-          topPillerHeight =
-              Random().nextInt(pillerFullWidth.toInt()).toDouble();
+          // topPillerHeight =
+          //     Random().nextInt(pillerFullWidth.toInt()).toDouble();
+          topPillerHeight = pillerFullWidth * 0.99;
           heightCache[index % 100] = topPillerHeight;
         } else {
           topPillerHeight = heightCache[index % 100]!;
         }
-        if (index < 3) {
-          return SizedBox(
+
+        /// For the first 3 pillers, we will only show the floor
+        if (index < 3 || index % 2 == 0) {
+          return const SizedBox(
             height: double.infinity,
             width: 200,
             child: Column(
               children: [
-                const Spacer(),
-                Container(
-                    width: double.infinity,
-                    height: 100,
-                    decoration: const BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage("assets/floor.png"),
-                            fit: BoxFit.fill))),
+                Spacer(),
+                FloorWidget(),
               ],
             ),
           );
-        } else if (index % 2 == 1) {
+        } else {
+          /// Show the up and down pillers
+
           return Container(
             height: double.infinity,
             color: Colors.transparent,
@@ -91,30 +89,7 @@ class _PillerPartState extends State<PillerPart> {
                     worldScrollController: widget.worldScrollController,
                     isTopPiller: false,
                     pillerHeight: pillerFullWidth - topPillerHeight),
-                Container(
-                    width: double.infinity,
-                    height: 100,
-                    decoration: const BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage("assets/floor.png"),
-                            fit: BoxFit.fill))),
-              ],
-            ),
-          );
-        } else {
-          return SizedBox(
-            height: double.infinity,
-            width: 200,
-            child: Column(
-              children: [
-                const Spacer(),
-                Container(
-                    width: double.infinity,
-                    height: 100,
-                    decoration: const BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage("assets/floor.png"),
-                            fit: BoxFit.fill))),
+                const FloorWidget(),
               ],
             ),
           );
