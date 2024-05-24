@@ -53,8 +53,8 @@ class ScoreBoardWidget extends StatelessWidget {
               width: 35,
               child: Image(
                 image: AssetImage(isPaused
-                    ? 'assets/img_btn_resume.png'
-                    : 'assets/pause.png'),
+                    ? 'assets/img_resume_btn.png'
+                    : 'assets/img_pause_btn.png'),
                 fit: BoxFit.cover,
               ),
             ),

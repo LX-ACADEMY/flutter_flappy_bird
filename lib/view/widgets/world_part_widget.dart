@@ -24,7 +24,6 @@ class WorldPartWidget extends StatefulWidget {
 
 class _WorldPartWidgetState extends State<WorldPartWidget> {
   final heightCache = List<double?>.generate(100, (index) => null);
-  late int customIndex;
 
   Timer? timer;
 
@@ -79,11 +78,11 @@ class _WorldPartWidgetState extends State<WorldPartWidget> {
                   worldScrollController: widget.worldScrollController,
                   isTopPiller: true,
                   pillerHeight: topPillerHeight,
-                  pillerIndex: customIndex,
+                  pillerIndex: index,
                 ),
                 const Spacer(),
                 PillerWidget(
-                    pillerIndex: customIndex,
+                    pillerIndex: index,
                     pasueGameCallback: widget.pauseGameCallback,
                     birdKey: widget.birdKey,
                     worldScrollController: widget.worldScrollController,
