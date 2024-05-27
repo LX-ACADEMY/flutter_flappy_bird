@@ -15,6 +15,7 @@ class BirdWidget extends StatefulWidget {
 }
 
 class _BirdWidgetState extends State<BirdWidget> {
+  //images for flapping the wing illusion creating
   var birdImages = [
     "assets/birddf.png",
     "assets/birdmf.png",
@@ -25,6 +26,7 @@ class _BirdWidgetState extends State<BirdWidget> {
   Timer? _birdWingsTimer;
 
   @override
+  //this will start the animation
   void initState() {
     startBirdAnimation();
 
@@ -32,6 +34,7 @@ class _BirdWidgetState extends State<BirdWidget> {
   }
 
   @override
+  //this is for using the functions in correct time stoping when outed or paused stop function will work,and start function will when resume.
   void didUpdateWidget(covariant BirdWidget oldWidget) {
     if (widget.isPaused) {
       stopBirdAnimation();
@@ -42,6 +45,7 @@ class _BirdWidgetState extends State<BirdWidget> {
     super.didUpdateWidget(oldWidget);
   }
 
+  //for stoping animation
   void startBirdAnimation() {
     if (!widget.isPaused) {
       stopBirdAnimation();
@@ -55,6 +59,7 @@ class _BirdWidgetState extends State<BirdWidget> {
     });
   }
 
+//for starting animation
   void stopBirdAnimation() {
     if (_birdWingsTimer != null) {
       _birdWingsTimer?.cancel();
@@ -64,6 +69,7 @@ class _BirdWidgetState extends State<BirdWidget> {
 
   @override
   Widget build(BuildContext context) {
+    //bird design
     return Container(
       height: 50,
       width: 50,
