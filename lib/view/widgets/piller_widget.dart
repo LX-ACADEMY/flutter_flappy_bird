@@ -88,6 +88,7 @@ class _PillerWidgetState extends State<PillerWidget> {
     }
   }
 
+  //checking piller collision 
   void checkPillerCollision() {
     final pillerBox = context.findRenderObject() as RenderBox;
     final birdBox =
@@ -120,6 +121,7 @@ class _PillerWidgetState extends State<PillerWidget> {
       showGameOverScreen();
     }
 
+    //collision checking upper the screen
     if ((birdtopleft.dy <= 0) && (widget.pillerIndex % 2 == 1)) {
       showGameOverScreen();
     }
@@ -148,8 +150,9 @@ class _PillerWidgetState extends State<PillerWidget> {
       width: 100,
       height: widget.pillerHeight,
       child: Column(
-        // mainAxisSize: MainAxisSize.min,
+        
         children: [
+          //adding head of the piller for bottom piller
           if (!widget.isTopPiller)
             Container(
               height: min(50, widget.pillerHeight),
@@ -170,6 +173,8 @@ class _PillerWidgetState extends State<PillerWidget> {
               ),
             ),
           ),
+
+          //adding head of the piller for top piller
           if (widget.isTopPiller)
             Transform(
               alignment: Alignment.center,

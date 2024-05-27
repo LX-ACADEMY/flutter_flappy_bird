@@ -54,6 +54,7 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 
+  //checking ground collision
   void checkGroundCollision() {
     final birdBox = birdKey.currentContext!.findRenderObject() as RenderBox;
     final birdHeight = birdBox.size.height;

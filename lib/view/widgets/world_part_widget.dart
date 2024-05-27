@@ -39,12 +39,17 @@ class _WorldPartWidgetState extends State<WorldPartWidget> {
 
   @override
   Widget build(BuildContext context) {
+
+    //for getting full size of the top and bottom pillers
     late double pillerFullWidth = MediaQuery.of(context).size.height - 300;
 
+    //for scrolling the screen of pillers
     return ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
       controller: widget.worldScrollController,
       scrollDirection: Axis.horizontal,
       itemBuilder: (context, index) {
+
         /// Fetch the top piller height from cache if it exists
         double topPillerHeight;
         if (heightCache[index % 100] == null) {
@@ -55,7 +60,7 @@ class _WorldPartWidgetState extends State<WorldPartWidget> {
           topPillerHeight = heightCache[index % 100]!;
         }
 
-        /// For the first 3 pillers, we will only show the floor
+        /// For the first 3 pillers and even pillers,  we will only show the floor 
         if (index < 3 || index % 2 == 0) {
           return const SizedBox(
             height: double.infinity,
